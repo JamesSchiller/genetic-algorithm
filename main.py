@@ -127,6 +127,14 @@ SEARCH_PRODUCEDURES = [
     ]
 ]
 
+SQUARE = 0 
+S = 1
+Z = 2
+T = 3 
+L = 4
+J = 5 
+LINE = 6
+
 GENERATIONS = 1
 
 scores = [0] * len(CHROMOSOMES)
@@ -182,6 +190,15 @@ def init_dna_instructions():
 def interpret(env_input, chromosome):
     value_of_gene1 = binary_to_decimal(chromosome[0], chromosome[1])
     value_of_gene2 = binary_to_decimal(chromosome[2], chromosome[3])
+    if env_input == "square": shape = SQUARE
+    elif env_input == "s": shape = S
+    elif env_input == "z": shape = Z
+    elif env_input == "T": shape = T
+    elif env_input == "L": shape = L
+    elif env_input == "J": shape = J
+    elif env_input == "l": shape = LINE
+    else: return
+    
     pass
 
 def rate_chromosomes():
