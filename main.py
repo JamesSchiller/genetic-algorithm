@@ -2,18 +2,18 @@ from tkinter import *
 
 root = Tk()
 
-CHROMOSOMES = 1
-GENERATIONS = 1
-
-scores = [0] * CHROMOSOMES
-cdf = [0] * CHROMOSOMES
-highest_rating = 0
-cdf_sum = 0
-
-height = 20
-width = 20
-count = 0
-clothtextboxes = {}
+CHROMOSOMES = [
+    [0, 0, 0, 0], 
+    [0, 1, 0, 1], 
+    [1, 0, 1, 0], 
+    [1, 1, 1, 0], 
+    [0, 0, 1, 1], 
+    [1, 1, 0, 0], 
+    [1, 0, 1, 0], 
+    [0, 0, 1, 1], 
+    [0, 0, 0, 0], 
+    [0, 1, 0, 1]
+]
 
 ENV_INPUTS = [
     "square", "s", "z", "T", "L", "J", "l", "square", "s", "z", "T", "L", "J", "l", "s", "z", "T", "L", "J", "l", "square", "square", "square", "square", "T", "L", "s", "s", 
@@ -36,6 +36,18 @@ ENV_INPUTS = [
     "square", "square", "square", "T", "L", "s", "s", "z", "z", "z", "square", "J", "L", "T", "T", "L", "l", "l"
 ]
 
+GENERATIONS = 1
+
+scores = [0] * len(CHROMOSOMES)
+cdf = [0] * len(CHROMOSOMES)
+highest_rating = 0
+cdf_sum = 0
+
+height = 20
+width = 20
+count = 0
+clothtextboxes = {}
+
 def clear_clothes():
     for i in range(height*width):
         clothtextboxes[str(i)].delete(0, END)
@@ -44,7 +56,7 @@ def clear_clothes():
 def clear_variables():
     i = 0
 
-    for i in range(CHROMOSOMES):
+    for i in range(len(CHROMOSOMES)):
         scores[i] = 0
         cdf[i] = 0
 
@@ -61,8 +73,8 @@ def evolve():
     clear_clothes()
 
     for generation in range(GENERATIONS):
-        for env_input in enumerate(ENV_INPUTS):
-            for chromosome in range(CHROMOSOMES):
+        for env_input in ENV_INPUTS:
+            for chromosome in CHROMOSOMES:
                 interpret(env_input, chromosome)
         rate_chromosomes()
         if generation < GENERATIONS:
@@ -77,6 +89,8 @@ def init_dna_instructions():
     pass
 
 def interpret(env_input, chromosome):
+    value_of_gene1 = binary_to_decimal(chromosome[0], chromosome[1])
+    value_of_gene2 = binary_to_decimal(chromosome[2], chromosome[3])
     pass
 
 def rate_chromosomes():
@@ -90,6 +104,13 @@ def reproduce():
 
 def save_highest_individual():
     pass
+
+def binary_to_decimal(high, low):
+ res = 0
+ if high == 1: res += 2
+ if low == 1: res += 1
+
+ return res
 
 for i in range(height): # rows
     for j in range(width): # columns
