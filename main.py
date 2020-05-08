@@ -3,7 +3,6 @@ from tkinter import *
 root = Tk()
 
 CHROMOSOMES = 1
-ENV_INPUTS = 90
 GENERATIONS = 1
 
 scores = [0] * CHROMOSOMES
@@ -15,6 +14,27 @@ height = 20
 width = 20
 count = 0
 clothtextboxes = {}
+
+ENV_INPUTS = [
+    "square", "s", "z", "T", "L", "J", "l", "square", "s", "z", "T", "L", "J", "l", "s", "z", "T", "L", "J", "l", "square", "square", "square", "square", "T", "L", "s", "s", 
+    "z", "z", "z", "T", "T", "L", "z", "J", "I", "I", "I", "I", "square", "square", "z", "s", "I", "s", "l", "J", "T", "z", "square", "s", "s", "s", "l", "J", "J", "I", "l", "J", "J", 
+    "I", "L", "J", "l", "square", "square", "square", "square", "T", "T", "T", "L", "z", "J", "I", "I", "I", "I", "square", "square", "J", "J", "T", "s", "l", "J", "T", "z", 
+    "square", "s", "s", "s", "l", "T", "z", "z", "J", "square", "l", "T", "z", "z", "J", "square", "l", "T", "z", "z", "J", "square", "square", "J", "J", "L", "s", "z", "l", "J", 
+    "J", "L", "s", "z", "l", "square", "s", "square", "s", "J", "J", "L", "s", "z", "l", "L", "L", "s", "s", "I", "z", "z", "z", "L", "s", "z", "l", "square", "s", "square", "s", "J", 
+    "J", "L", "s", "z", "T", "L", "J", "l", "s", "z", "T", "L", "J", "l", "square", "z", "T", "L", "J", "l", "s", "z", "T", "L", "J", "l", "square", "T", "T", "L", "L", "s", "z", "l", "square", 
+    "T", "L", "L", "s", "z", "T", "L", "L", "s", "z", "T", "L", "L", "s", "z", "s", "s", "s", "s", "s", "s", "z", "z", "z", "z", "L", "L", "T", "T", "z", "z", "L", "L", "T", "square", "z", "square", 
+    "z", "square", "z", "square", "z", "square", "z", "square", "z", "s", "s", "s", "s", "s", "s", "L", "T", "T", "L", "l", "l", "l", "l", "l", "l", "l", "l", "square", "z", "square", 
+    "z", "s", "s", "square", "z", "square", "z", "s", "s", "l", "T", "l", "L", "l", "T", "l", "L", "l", "T", "l", "L", "square", "z", "L", "T", "l", "l", "s", "z", "z", "L", "T", "l", "l", "s", 
+    "L", "l", "T", "l", "L", "square", "z", "L", "T", "l", "l", "s", "z", "z", "L", "T", "l", "l", "s", "square", "s", "z", "T", "L", "J", "l", "square", "s", "z", "T", "L", "J", "l", "s", "z", 
+    "T", "L", "J", "l", "square", "square", "square", "square", "T", "L", "s", "s", "z", "z", "z", "T", "T", "L", "z", "J", "I", "I", "I", "I", "square", "square", "z", "square", 
+    "s", "z", "T", "L", "J", "l", "square", "s", "z", "T", "L", "J", "l", "s", "z", "T", "L", "J", "l", "square", "square", "square", "square", "T", "L", "s", "s", "z", "z", "z", "T", "T", 
+    "L", "z", "J", "I", "I", "I", "I", "square", "square", "z", "l", "l", "z", "J", "I", "I", "T", "T", "L", "z", "J", "I", "I", "I", "I", "square", "square", "z", "l", "l", "z", "z", "T", 
+    "T", "L", "z", "J", "I", "I", "I", "I", "square", "square", "z", "s", "I", "s", "l", "J", "T", "z", "square", "s", "s", "s", "l", "J", "J", "I", "l", "J", "J", "I", "L", "J", "l", "square", 
+    "square", "square", "s", "s", "s", "T", "J", "I", "l", "J", "J", "I", "L", "J", "l", "square", "T", "s", "l", "J", "T", "z", "square", "s", "s", "s", "l", "T", "z", "z", "J", "square", 
+    "l", "T", "z", "z", "J", "square", "l", "T", "z", "z", "J", "square", "square", "J", "J", "L", "s", "z", "l", "J", "J", "L", "s", "z", "l", "square", "s", "square", "s", "J", "J", "L", 
+    "T", "T", "L", "l", "l", "l", "l", "l", "l", "l", "l", "square", "z", "square", "z", "L", "L", "T", "T", "square", "square", "z", "z", "z", "z", "z", "T", "L", "J", "l", "square", 
+    "square", "square", "square", "T", "L", "s", "s", "z", "z", "z", "square", "J", "L", "T", "T", "L", "l", "l"
+]
 
 def clear_clothes():
     for i in range(height*width):
@@ -41,7 +61,7 @@ def evolve():
     clear_clothes()
 
     for generation in range(GENERATIONS):
-        for env_input in range(ENV_INPUTS):
+        for env_input in enumerate(ENV_INPUTS):
             for chromosome in range(CHROMOSOMES):
                 interpret(env_input, chromosome)
         rate_chromosomes()
