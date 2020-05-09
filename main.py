@@ -461,6 +461,15 @@ J = 5
 LINE = 6
 
 GENERATIONS = 1
+TOP_LEFT_ROW = 4
+TOP_LEFT_COL = 4
+TOP_RIGHT_ROW = 4
+TOP_RIGHT_COL = 23
+BOTTOM_LEFT_ROW = 23
+BOTTOM_LEFT_COL = 4
+BOTTOM_RIGHT_ROW = 23
+BOTTOM_RIGHT_COL = 23
+BIG_CLOTH_SIZE = 28*28
 
 scores = [0] * len(CHROMOSOMES)
 cdf = [0] * len(CHROMOSOMES)
@@ -471,6 +480,13 @@ height = 20
 width = 20
 count = 0
 clothtextboxes = {}
+
+def binary_to_decimal(high, low):
+    res = 0
+    if high == 1: res += 2
+    if low == 1: res += 1
+
+    return res
 
 def clear_clothes():
     for i in range(height*width):
@@ -529,7 +545,12 @@ def interpret(env_input, chromosome):
     
     for element in sp_array:
         if element == next_int:
-            pass
+            for i in range(BIG_CLOTH_SIZE):
+                if (i >= TOP_LEFT_ROW and i <= BOTTOM_LEFT_ROW and i >= TOP_LEFT_COL and i <= TOP_RIGHT_COL):
+                    rotation_worked = try_rotations(chromosome, shape, value_of_gene2, i)
+                else: # dead code area
+                    pass
+                
     pass
 
 def rate_chromosomes():
@@ -544,12 +565,8 @@ def reproduce():
 def save_highest_individual():
     pass
 
-def binary_to_decimal(high, low):
- res = 0
- if high == 1: res += 2
- if low == 1: res += 1
-
- return res
+def try_rotations(chromosome, shape, value_of_gene2, i):
+    pass
 
 for i in range(height): # rows
     for j in range(width): # columns
