@@ -139,3 +139,4 @@ cython_debug/
 
 old.py
 scratch.py
+.DS_Store
